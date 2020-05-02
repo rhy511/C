@@ -1,0 +1,68 @@
+
+--------------------------------------------------------------------------------------------------
+- pthread常用 Function
+  - pthread_t: 宣告pthread
+    e.g.  pthread_t pthread_1;
+  - pthread_create: 建立thread
+    (pthread_create( 指向thread的位址, thread屬性(NULL/0), 運行函式的位址, 運行函式的參數(NULL)))
+    e.g.  pthread_create(&pthread_1, NULL, func, NULL);  
+  - pthread_exit: 終止當前的thread  
+    e.g.  pthread_exit(NULL);
+    e.g.  pthread_exit("Thank you for the CPU time");
+  - pthread_join: 等待一個特定的thread退出
+    e.g.  pthread_join(pthread_1, NULL);  
+  - pthread_yield: 釋放CPU，來運行另一個thread 
+    (使用sched_yield)
+    e.g.  sched_yield();
+  - sleep: thread等待時間
+    (_sleep);
+    e.g.  _sleep(1);
+  - pthread_self: 查詢thread標籤ID
+    e.g.  pthread_t myid = pthread_self();
+	  printf("Thread ID = %d \n", myid);
+  - pthread_once_t: 某些需要僅執行一次的函數 
+    e.g.  pthread_once_t once = PTHREAD_ONCE_INIT;
+          pthread_once(&once, func);
+
+--------------------------------------------------------------------------------------------------
+-  pthread attr屬性相關
+  - pthread_attr_t: 宣告pthread屬性
+    e.g.  pthread_attr_t attr;
+  - pthread_attr_init: 建立並初始化一個thread的屬性結構
+    e.g.  pthread_attr_init(&attr);  
+  - pthread_attr_setscope: 設定thread屬性變量的__scope屬性
+    e.g.  pthread_attr_setscope(&attr, PTHREAD_SCOPE_PROCESS);
+  - pthread_attr_setschedparam: 設定thread屬性變量的schedparam屬性，即調用的優先級。
+  - pthread_attr_getschedparam: 獲取thread屬性變量的schedparam屬性，即調用的優先級。
+  - pthread_attr_setschedpolicy: 設定scheduling policy
+    (SCHED_RR: SCHEDULING_ROUNDROBIN policy / SCHED_FIFO)
+    e.g.  pthread_attr_setschedpolicy(pc_data->attr, SCHED_RR)
+  - pthread_attr_destroy: 刪除一個thread的屬性結構
+    e.g.  pthread_attr_destroy(&attr);
+
+--------------------------------------------------------------------------------------------------
+-  pthread mutex互斥量相關
+  - 宣告mutex 
+   e.g.  pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER; 
+  - pthread_mutex_lock: 佔有mutex(阻塞操作) 
+   e.g.  pthread_mutex_lock(&mutex1);
+  - pthread_mutex_unlock: 釋放mutex 
+   e.g.  pthread_mutex_unlock(&mutex1);
+  - pthread_mutex_destroy: 刪除mutex 
+   e.g.  pthread_mutex_destroy(&mutex1);
+			
+--------------------------------------------------------------------------------------------------
+-  pthread condition條件變量相關
+  - 宣告condittion變量 
+   e.g.  pthread_cond_t cond1 = PTHREAD_COND_INITIALIZER;
+ - pthread_cond_wait: 阻塞以等待一個信號 
+   e.g.  pthread_cond_wait(&cond1, &mutex1);
+ - pthread_cond_signal: 向另一個thread發信號來喚醒它
+   e.g.  pthread_cond_signal(&cond1);
+ - pthread_cond_destroy: 刪除condition
+   e.g.  pthread_cond_destroy(&cond1);
+
+
+
+
+
