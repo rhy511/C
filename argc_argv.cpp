@@ -6,8 +6,7 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-	// argc: argument count(參數總和)
-    // argv: argument value(參數值)
+	// argc: argument count(參數總和), argv: argument value(參數值)
 	cout << "There is " << argc << " arguments" << endl;
 	for(int i = 0; i < argc; i++){
 		cout << "["<< i <<"]"<< argv[i] << endl;
